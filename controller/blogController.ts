@@ -41,17 +41,17 @@ export const createBlog = async (req: Request, res: Response) => {
   }
 };
 
-export const viewAllUsers = async (req: Request, res: Response) => {
+export const viewAllBlogs = async (req: Request, res: Response) => {
   try {
-    const user = await userModel.find();
+    const user = await blogModel.find();
     return res.status(200).json({
-      message: "finding all users",
+      message: "finding all blog",
       data: user,
       status: 200,
     });
   } catch (error) {
     return res.status(404).json({
-      message: "error finding all user",
+      message: "error finding all blog",
       status: 404,
     });
   }
