@@ -1,4 +1,4 @@
-import { Schema, model, Document } from "mongoose";
+import { Schema, model, Document, Types } from "mongoose";
 
 interface iUser {
   FullName: string;
@@ -6,6 +6,8 @@ interface iUser {
   Password: string;
   avatar: string;
   verify: boolean;
+
+  blogs: Array<{}>;
 }
 
 interface iUserData extends iUser, Document {}
@@ -32,6 +34,12 @@ const userModel = new Schema<iUserData>(
     avatar: {
       type: String,
     },
+    blogs: [
+      {
+        type: Types.ObjectId,
+        ref: "blogs",
+      },
+    ],
   },
   { timestamps: true }
 );
