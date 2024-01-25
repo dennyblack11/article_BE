@@ -56,3 +56,28 @@ export const viewAllUsers = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const viewOneUserBlog = async (req: Request, res: Response) => {
+  try {
+    const { userID } = req.params;
+    const blog = await userModel.findById(userID).populate({
+      path: "blogs",
+      options: {
+        sort: {
+          createdAt: -1,
+        },
+      },
+    });
+
+    return res.status(200).json({
+      message: "finding one user's blog",
+      data: blog,
+      status: 200,
+    });
+  } catch (error) {
+    return res.status(404).json({
+      message: "error finding one user",
+      status: 404,
+    });
+  }
+};
